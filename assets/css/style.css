@@ -1,0 +1,8 @@
+body{
+    background: rgb(255, 60, 0);
+}
+
+.jumbotron{
+    background: url("../images/bacccccc.jpg");
+    background-size: cover;
+}
