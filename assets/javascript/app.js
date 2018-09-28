@@ -1,3 +1,8 @@
+// JS file for HOMEWORK #7
+
+$(document).ready(function() {
+var rowNum = 0;
+
 var config = {
     apiKey: "AIzaSyD_NNRuOlWsz6iQ75WMF2CHEDwO7FTvarE",
     authDomain: "train-scheduler-55dc1.firebaseapp.com",
@@ -9,6 +14,7 @@ var config = {
   firebase.initializeApp(config);
 
   var database = firebase.database();
+  
 
   $('#add-train-btn').on('click', function(event){
     event.preventDefault();
@@ -33,42 +39,68 @@ var config = {
     $('#time-input').val('');
     $('#freq-input').val('');
 
-});
+  });
 
 // Adding to HTML table
 
-database.ref().on("child_added", function(snapshot) {
+database.ref().on('child_added', function(snapshot) {
     // storing the snapshot.val() in a variable for convenience
+    var removeButton = $('<button>').text('X').addClass('removeButton btn btn-danger btn-sm').attr('data-index', rowNum).attr('data-key', snapshot.key);
     var addTrain = snapshot.val();
+    
+    var firstTimeConverted = moment(addTrain.firstTime, "HH:mm").subtract(1, "years");
+    
+    // Current Time
+    var currentTime = moment();
+    
 
-    // Console.loging the last user's data
-    console.log(addTrain.trainName);
-    console.log(addTrain.destination);
-    console.log(addTrain.firstTime);
-    console.log(addTrain.frequency);
+    // Difference between the times
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    
+
+    // Time apart (remainder)
+    var tRemainder = diffTime % addTrain.frequency;
+   
+
+    // Minute Until Train
+    var tMinutesTillTrain = addTrain.frequency - tRemainder;
+   
+    // Next Train
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes").format("hh:mm A");
+    
 
     // Change the HTML to reflect
     var newRow = $('<tr>');
-    // newRow.addClass('row');
+    newRow.attr('id','row-' + rowNum);
     var cell1 = $('<td>').text(addTrain.trainName);
     var cell2 = $('<td>').text(addTrain.destination);
-    var cell3 = $('<td>').text(addTrain.firstTime);
-    var cell4 = $('<td>').text(addTrain.frequency);
-    var cell5 = $('<td>').text(addTrain.frequency);
+    var cell3 = $('<td>').text(addTrain.frequency);
+    var cell4 = $('<td>').text(nextTrain);
+    var cell5 = $('<td>').text(tMinutesTillTrain);
+    var cell6 = $('<td>').html(removeButton);
 
     newRow.append(cell1);
     newRow.append(cell2);
     newRow.append(cell3);
     newRow.append(cell4);
     newRow.append(cell5);
+    newRow.append(cell6);
 
-    $('#train-table').append(newRow);
+    $('#train-table').prepend(newRow);
 
+    rowNum++;
 
     // Handle the errors
   }, function(errorObject) {
     console.log("Errors handled: " + errorObject.code);
   });
 
+  function removeTrain () {
+    event.preventDefault();
+    $(".row-" + $(this).attr("data-index")).remove();
+    database.ref().child($(this).attr("data-key")).remove();
+  };
 
+  $(document).on('click', '.removeButton', removeTrain);
 
+}); //PAGE CLOSING BRACKET

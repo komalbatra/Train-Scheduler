@@ -1,8 +1,20 @@
-body{
-    background: rgb(255, 60, 0);
-}
+/* CSS file for Homework#7 */
 
 .jumbotron{
-    background: url("../images/bacccccc.jpg");
+    background: url("../images/supertrain5.jpg");
     background-size: cover;
+    font-family: 'Raleway', sans-serif;
+    color: #fff; 
+}
+
+.card-title{
+    font-family: 'Raleway', sans-serif;
+    font-size: 30px;
+}
+
+#add-title{
+    font-family: 'Raleway', sans-serif;
+    font-size: 30px;
+    background:#808e97;
+    color: #fff;
 }
