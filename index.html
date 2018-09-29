@@ -1,3 +1,4 @@
+<!-- HTML file for Homework #7: TRAIN SCHEDULER -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,59 +22,59 @@
             <p class="lead">How to tell when a train is arriving...</p>               
         </div>
         
+        <!-- Current schedules View -->
         <div class="row">
             <div class="col-lg-8 card" style = "width: 48rem;">
-                    <!-- <div class="card-header">
-                        <h5 class="card-title">Current Train Schedule</h5>  
-                    </div> -->
-                    <div class="card-body" id="mytraintable">
-                            <h5 class="card-title">Current Train Schedules</h5>
-                            <table class="table table-sm table-hover table-striped">
-                                <thead class="thead thead-dark">
-                                <tr>
-                                    <th scope="col">Train Name</th>
-                                    <th scope="col">Destination</th>
-                                    <th scope="col">Frequency (min)</th>
-                                    <th scope="col">Next Arrival</th>
-                                    <th scope="col">Minutes Away</th>
-                                    <th scope="col"></th>
-                                </tr>
-                                </thead>
-                                <tbody class = tbody id="train-table">
-                                </tbody>
-                            </table>
-                    </div>
+                <div class="card-body" id="mytraintable">
+                    <h5 class="card-title">Current Train Schedules</h5>
+                    <table class="table table-sm table-hover table-striped">
+                        <thead class="thead thead-dark">
+                        <tr>
+                            <th scope="col">Train Name</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Frequency (min)</th>
+                            <th scope="col">Next Arrival</th>
+                            <th scope="col">Minutes Away</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <!-- Train Schdule table will go here -->
+                        <tbody class = tbody id="train-table">
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        
-            
-        
+
+            <!-- Form for adding a train -->
             <div class="col-lg-4 card text-center">
-                    <div class="card-header" id="add-title">
+                <div class="card-header" id="add-title">
                     <h5>Add a Train</h5>
-                    </div>
-                    <div class="card-body">
+                </div>
+                <div class="card-body">
                     <form>
-                            <div class="form-group">
-                                <label for="train-name">Train Name</label>
-                                <input type="text" class="form-control" id="train-input">
-                            </div>
-                            <div class="form-group">
-                                <label for="destination">Destination</label>
-                                <input type="text" class="form-control" id="dest-input">
-                            </div>
-                            <div class="form-group">
-                                <label for="time">First Train Time (HH:mm - military time)</label>
-                                <input type="text" class="form-control" id="time-input">
-                            </div>
-                            <div class="form-group">
-                                <label for="frequency">Frequency (min))</label>
-                                <input type="number" class="form-control" id="freq-input">
-                            </div>
-                            <button type="submit" class="btn btn-secondary" id="add-train-btn">Submit</button>
+                        <div class="form-group">
+                            <label for="train-name">Train Name</label>
+                            <input type="text" class="form-control" id="train-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="destination">Destination</label>
+                            <input type="text" class="form-control" id="dest-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="time">First Train Time (HH:mm - military time)</label>
+                            <input type="text" class="form-control" id="time-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="frequency">Frequency (min))</label>
+                            <input type="number" class="form-control" id="freq-input">
+                        </div>
+                        <button type="submit" class="btn btn-secondary" id="add-train-btn">Submit</button>
                     </form>
                 </div>
             </div>
-            <div class="modal" id="my-modal" tabindex="-1" role="dialog">
+
+            <!-- Modal for "frequency cannot be negative validation" -->
+            <div class="modal modal-1" id="my-modal-1" tabindex="-1" role="dialog">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -90,20 +91,44 @@
                     </div>
                   </div>
                 </div>
-              </div>
+            </div>
+
+            <!-- Modal for ensuring all fields in form are filled -->
+            <div class="modal modal-2" id="my-modal-2" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Stop!</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>All fields are mandatory. Please enter all information before submitting.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
         </div>
     </div>
+
     <!-- jQuery Link -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script> -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  -->
+    
+    <!-- Bootstrap jQuery Link -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
     <!-- Firebase Link -->
     <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+
     <!-- My javascript file -->
     <script src="assets/javascript/app.js"></script>
-     <!-- Link to Moment.js should go here -->
-  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+    <!-- Link to Moment.js should go here -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     
 </body>
 </html>
