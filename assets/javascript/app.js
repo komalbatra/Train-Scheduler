@@ -22,7 +22,12 @@ var config = {
     var destination = $('#dest-input').val().trim();
     var firstTime = $('#time-input').val().trim();
     var frequency = $('#freq-input').val().trim();
-
+    if (frequency<0){
+      //clear the frequency if it is not a number
+      $(".modal").modal();
+      $('#freq-input').val('');
+    }
+    else{
     var newTrain = {
         trainName: trainName,
         destination: destination,
@@ -33,12 +38,13 @@ var config = {
     
     database.ref().push(newTrain);
 
+
     // Clear Form
     $('#train-input').val('');
     $('#dest-input').val('');
     $('#time-input').val('');
     $('#freq-input').val('');
-
+    }
   });
 
 // Adding to HTML table
@@ -96,9 +102,10 @@ database.ref().on('child_added', function(snapshot) {
   });
 
   function removeTrain () {
-    event.preventDefault();
+   // event.preventDefault();
     $(".row-" + $(this).attr("data-index")).remove();
     database.ref().child($(this).attr("data-key")).remove();
+    $('#mytraintable').show(); 
   };
 
   $(document).on('click', '.removeButton', removeTrain);

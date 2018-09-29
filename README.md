@@ -4,7 +4,7 @@ Homework # 7
 
 Pending Tasks
  - Validate the time format
- - Validate that frequency is a number
+ - Make Train Name & Destination Mandatory
  
 
 ### **Creator:** `Komal Batra`
@@ -28,6 +28,7 @@ Train Schduler is a web based application that lets an admin user enter details 
 - HTML
 - CSS
 - Bootstrap
+    - Modal, Card, Button, Form, Table
 - Javascript
 - JQuery
 - Git
