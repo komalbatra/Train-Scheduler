@@ -40,6 +40,11 @@ Train Schduler is a web based application that lets an admin user enter details 
 - - -
 ## Javascript File
 
+Validations:
+User should enter all information for Submit to work
+User can only use a number for frequency
+User can not use a negative number for frequency
+
 Involves:
 Connecting to a Firebase database and capturing user inputted data
 User can also enter the name and other details of a new train

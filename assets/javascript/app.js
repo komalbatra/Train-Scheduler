@@ -24,7 +24,7 @@ $('#add-train-btn').on('click', function(event){
     var destination = $('#dest-input').val().trim();
     var firstTime = $('#time-input').val().trim();
     var frequency = $('#freq-input').val().trim();
-    // Validate if fileds are left blank
+    // Validate if fields are left blank
     if((trainName.length<1) ||(destination.length<1) || (firstTime.length<1) || (frequency.length<1)){
       // Warn user with Modal
       $('.modal-2').modal();
@@ -47,6 +47,9 @@ $('#add-train-btn').on('click', function(event){
     
     database.ref().push(newTrain);
 
+    // modal to let user know that new train has been added.
+    $('.modal-3').modal();
+
     // Clear Form
     $('#train-input').val('');
     $('#dest-input').val('');
@@ -62,14 +65,13 @@ database.ref().on('child_added', function(snapshot) {
   var removeButton = $('<button>').text('X').addClass('removeButton btn btn-danger btn-sm').attr('data-index', rowNum).attr('data-key', snapshot.key);
   // storing the snapshot.val() in a variable 
   var addTrain = snapshot.val();
-  var firstTimeConverted = moment(addTrain.firstTime, "HH:mm").subtract(1, "years");
+  var firstTimeConverted = moment(addTrain.firstTime, 'HH:mm').subtract(1, 'years');
    
   // Current Time
   var currentTime = moment();
-    
-
+  
   // Difference between the times
-  var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+  var diffTime = moment().diff(moment(firstTimeConverted), 'minutes');
     
   // Time apart (remainder)
   var tRemainder = diffTime % addTrain.frequency;
@@ -78,7 +80,7 @@ database.ref().on('child_added', function(snapshot) {
   var tMinutesTillTrain = addTrain.frequency - tRemainder;
    
   // Next Train
-  var nextTrain = moment().add(tMinutesTillTrain, "minutes").format("hh:mm A");
+  var nextTrain = moment().add(tMinutesTillTrain, 'minutes').format('hh:mm A');
    
   // Change the HTML to reflect
   var newRow = $('<tr>');
@@ -103,16 +105,17 @@ database.ref().on('child_added', function(snapshot) {
 
   // Handle the errors
   }, function(errorObject) {
-    console.log("Errors handled: " + errorObject.code);
+    console.log('Errors handled: ' + errorObject.code);
   });
 
+  // function to delete records
   function removeTrain () {
    // event.preventDefault();
-    $(".row-" + $(this).attr("data-index")).remove();
-    database.ref().child($(this).attr("data-key")).remove();
-    $('#mytraintable').show(); 
+    $('.row-' + $(this).attr('data-index')).remove();
+    database.ref().child($(this).attr('data-key')).remove();
   };
 
+  // event listener - when user clicks the X button to remove train
   $(document).on('click', '.removeButton', removeTrain);
 
 }); //PAGE CLOSING BRACKET
