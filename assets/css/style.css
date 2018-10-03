@@ -1,5 +1,9 @@
 /* CSS file for Homework#7 */
 
+body{
+    background-color:#444a5a!important;
+}
+
 .jumbotron{
     background: url("../images/supertrain5.jpg");
     background-size: cover;
@@ -19,6 +23,6 @@
     color: #fff;
 }
 
-.selector-for-some-widget {
-    box-sizing: content-box;
-  }
+footer{
+    text-align: right;
+}
